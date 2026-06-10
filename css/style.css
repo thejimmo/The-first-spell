@@ -75,14 +75,45 @@ a { color: var(--gold); }
   z-index: 1;
 }
 
+.hero-cover {
+  position: relative;
+}
+
 .hero-cover img {
   width: 100%;
   height: auto;
   display: block;
+  position: relative;
+  z-index: 1;
   border-radius: 4px;
   box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.55),
+    0 24px 70px rgba(0, 0, 0, 0.35),
     0 0 80px rgba(217, 184, 115, 0.12);
+  animation: cover-float 7s ease-in-out infinite;
+}
+
+/* detached ground shadow that breathes opposite the float */
+.hero-cover::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -38px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 70%);
+  filter: blur(12px);
+  animation: cover-shadow 7s ease-in-out infinite;
+}
+
+@keyframes cover-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes cover-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.85; }
+  50%      { transform: scaleX(0.94); opacity: 0.55; }
 }
 
 .kicker {
@@ -316,6 +347,7 @@ blockquote {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .cta-flame svg { animation: none; }
+  .hero-cover img, .hero-cover::after { animation: none; }
 }
 
 /* ===== Responsive ===== */
