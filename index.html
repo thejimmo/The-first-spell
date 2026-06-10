@@ -9,7 +9,7 @@
   <meta property="og:type" content="book">
   <meta property="og:title" content="The First Spell — A Practical Magic System for the Modern World">
   <meta property="og:description" content="What has traditionally been called magic can be understood as the deliberate use of attention, intention, emotion, symbolism, and action. By Jimi Knightley. Available on Amazon.">
-  <meta property="og:image" content="https://thejimmo.github.io/The-first-spell/assets/cover.jpg">
+  <meta property="og:image" content="https://thejimmo.github.io/The-first-spell/assets/cover.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -24,8 +24,8 @@
   <header class="hero">
     <div class="hero-inner">
       <div class="hero-cover reveal">
-        <!-- Uses the real cover (assets/cover.jpg); falls back to the SVG recreation until it exists -->
-        <img src="assets/cover.jpg" onerror="this.onerror=null;this.src='assets/cover.svg'" alt="Book cover of The First Spell: a single lit candle inside a faint geometric sigil on a dark background" width="1179" height="1546">
+        <!-- Uses the 3D hardcover mockup (assets/cover.png); falls back to the flat jpg, then the SVG recreation -->
+        <img src="assets/cover.png" onerror="if(this.src.indexOf('.png')>-1){this.src='assets/cover.jpg'}else{this.onerror=null;this.src='assets/cover.svg'}" alt="Hardcover of The First Spell: a lit candle in a brass holder inside a golden alchemical sigil on a deep navy cover" width="1179" height="1546">
       </div>
       <div class="hero-text">
         <p class="kicker reveal">A practical magic system for the modern world</p>

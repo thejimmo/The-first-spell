@@ -1,12 +1,12 @@
 :root {
-  --bg: #081210;
-  --bg-raised: #0c1f1b;
-  --bg-glow: #13322c;
-  --gold: #d9b873;
-  --gold-bright: #ecd9a4;
-  --gold-dim: #a8854a;
-  --text: #cfd8d4;
-  --text-dim: #93a39d;
+  --bg: #070d18;
+  --bg-raised: #0e1a30;
+  --bg-glow: #15294d;
+  --gold: #d3ab62;
+  --gold-bright: #ecd49b;
+  --gold-dim: #a07f42;
+  --text: #c8d2e2;
+  --text-dim: #8c99af;
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Inter", system-ui, -apple-system, sans-serif;
 }
@@ -85,10 +85,10 @@ a { color: var(--gold); }
   display: block;
   position: relative;
   z-index: 1;
-  border-radius: 4px;
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.35),
-    0 0 80px rgba(217, 184, 115, 0.12);
+  /* drop-shadow follows the book's alpha contour (3D mockup PNG) */
+  filter:
+    drop-shadow(0 24px 38px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 50px rgba(211, 171, 98, 0.14));
   animation: cover-float 7s ease-in-out infinite;
 }
 
@@ -164,20 +164,20 @@ a { color: var(--gold); }
 .btn-primary {
   background: linear-gradient(180deg, var(--gold-bright), var(--gold-dim));
   color: #1a1206;
-  box-shadow: 0 4px 24px rgba(217, 184, 115, 0.25);
+  box-shadow: 0 4px 24px rgba(211, 171, 98, 0.25);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 4px 36px rgba(217, 184, 115, 0.45);
+  box-shadow: 0 4px 36px rgba(211, 171, 98, 0.45);
   transform: translateY(-1px);
 }
 
 .btn-ghost {
-  border: 1px solid rgba(217, 184, 115, 0.4);
+  border: 1px solid rgba(211, 171, 98, 0.4);
   color: var(--gold);
 }
 
-.btn-ghost:hover { border-color: var(--gold); background: rgba(217, 184, 115, 0.06); }
+.btn-ghost:hover { border-color: var(--gold); background: rgba(211, 171, 98, 0.06); }
 
 /* ===== Sections ===== */
 
@@ -209,7 +209,7 @@ a { color: var(--gold); }
 .contract-list {
   list-style: none;
   margin-top: 2.5rem;
-  border-top: 1px solid rgba(217, 184, 115, 0.18);
+  border-top: 1px solid rgba(211, 171, 98, 0.18);
 }
 
 .contract-list li {
@@ -217,7 +217,7 @@ a { color: var(--gold); }
   align-items: baseline;
   gap: 1.75rem;
   padding: 1.6rem 0;
-  border-bottom: 1px solid rgba(217, 184, 115, 0.18);
+  border-bottom: 1px solid rgba(211, 171, 98, 0.18);
   font-family: var(--serif);
   font-size: 1.35rem;
   color: var(--gold-bright);
@@ -246,14 +246,14 @@ a { color: var(--gold); }
 
 .element {
   padding: 2rem 1.5rem;
-  background: rgba(19, 50, 44, 0.35);
-  border: 1px solid rgba(217, 184, 115, 0.12);
+  background: rgba(21, 41, 77, 0.38);
+  border: 1px solid rgba(211, 171, 98, 0.12);
   border-radius: 4px;
   transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .element:hover {
-  border-color: rgba(217, 184, 115, 0.4);
+  border-color: rgba(211, 171, 98, 0.4);
   transform: translateY(-3px);
 }
 
@@ -324,7 +324,7 @@ blockquote {
 
 .footer {
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(217, 184, 115, 0.12);
+  border-top: 1px solid rgba(211, 171, 98, 0.12);
   font-size: 0.85rem;
   color: var(--text-dim);
   text-align: center;

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" font-family="Cormorant Garamond, Georgia, 'Times New Roman', serif">
   <defs>
     <radialGradient id="bgGlow" cx="50%" cy="62%" r="75%">
-      <stop offset="0%" stop-color="#13322c"/>
-      <stop offset="45%" stop-color="#0c1f1b"/>
-      <stop offset="100%" stop-color="#060e0d"/>
+      <stop offset="0%" stop-color="#1b2f55"/>
+      <stop offset="45%" stop-color="#0e1a30"/>
+      <stop offset="100%" stop-color="#070d18"/>
     </radialGradient>
     <radialGradient id="candleGlow" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#f5c97a" stop-opacity="0.55"/>
