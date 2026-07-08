@@ -35,13 +35,21 @@ if (audio) {
   };
 
   const showDuration = () => {
-    if (isFinite(audio.duration)) {
+    if (isFinite(audio.duration) && audio.duration > 0) {
       seek.max = audio.duration;
       total.textContent = fmt(audio.duration);
     }
   };
+  // iOS Safari is lazy about metadata, so listen broadly
   audio.addEventListener('loadedmetadata', showDuration);
+  audio.addEventListener('durationchange', showDuration);
+  audio.addEventListener('canplay', showDuration);
   showDuration();
+
+  const paintProgress = (value) => {
+    const max = Number(seek.max) || 1;
+    seek.style.setProperty('--progress', (100 * value / max) + '%');
+  };
 
   toggle.addEventListener('click', () => {
     if (audio.paused) audio.play();
@@ -59,12 +67,16 @@ if (audio) {
 
   audio.addEventListener('timeupdate', () => {
     current.textContent = fmt(audio.currentTime);
-    if (!seeking) seek.value = audio.currentTime;
+    if (!seeking) {
+      seek.value = audio.currentTime;
+      paintProgress(audio.currentTime);
+    }
   });
 
   seek.addEventListener('input', () => {
     seeking = true;
     current.textContent = fmt(Number(seek.value));
+    paintProgress(Number(seek.value));
   });
   seek.addEventListener('change', () => {
     audio.currentTime = Number(seek.value);
@@ -74,5 +86,6 @@ if (audio) {
   audio.addEventListener('ended', () => {
     audio.currentTime = 0;
     seek.value = 0;
+    paintProgress(0);
   });
 }

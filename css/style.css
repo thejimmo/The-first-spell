@@ -347,12 +347,40 @@ blockquote {
 }
 
 .player-seek {
+  -webkit-appearance: none;
+  appearance: none;
   display: block;
   width: 100%;
   margin: 0;
-  accent-color: var(--gold);
+  height: 6px;
+  border-radius: 3px;
+  /* --progress is set from JS; the gradient paints the played part gold */
+  background: linear-gradient(to right,
+    var(--gold) var(--progress, 0%),
+    rgba(211, 171, 98, 0.22) var(--progress, 0%));
   cursor: pointer;
 }
+
+.player-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-bright);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.player-seek::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: var(--gold-bright);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.player-seek::-moz-range-track { background: transparent; }
 
 .player-time {
   display: flex;
