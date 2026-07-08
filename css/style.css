@@ -288,6 +288,87 @@ blockquote {
   color: var(--gold-bright);
 }
 
+/* ===== Listen / audio player ===== */
+
+.section-listen {
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(21, 41, 77, 0.5) 0%, transparent 70%),
+    var(--bg);
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 1.9rem;
+  background: rgba(21, 41, 77, 0.38);
+  border: 1px solid rgba(211, 171, 98, 0.18);
+  border-radius: 6px;
+}
+
+/* custom controls are JS-driven: hidden without JS, where the native player shows instead */
+.player-toggle, .player-body { display: none; }
+.js .player-toggle { display: grid; }
+.js .player-body { display: block; }
+.player audio { width: 100%; }
+.js .player audio { display: none; }
+
+.player-toggle {
+  place-items: center;
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #1a1206;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-dim));
+  box-shadow: 0 4px 24px rgba(211, 171, 98, 0.3);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.player-toggle:hover {
+  box-shadow: 0 4px 36px rgba(211, 171, 98, 0.5);
+  transform: scale(1.04);
+}
+
+.player-toggle svg { width: 26px; height: 26px; }
+.player-toggle .icon-pause { display: none; }
+.player.playing .icon-play { display: none; }
+.player.playing .icon-pause { display: block; }
+
+.player-body { flex: 1; min-width: 0; }
+
+.player-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--gold-bright);
+  margin-bottom: 0.5rem;
+}
+
+.player-seek {
+  display: block;
+  width: 100%;
+  margin: 0;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.player-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 820px) {
+  .player { padding: 1.25rem; gap: 1rem; }
+  .player-toggle { width: 54px; height: 54px; }
+}
+
 /* ===== Author ===== */
 
 .section-author {

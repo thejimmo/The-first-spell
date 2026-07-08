@@ -21,8 +21,9 @@ cover, just add the image as `assets/cover.jpg` — no code changes needed.
 ## Preview locally
 
 ```bash
-python3 -m http.server 8000
+pip install rangehttpserver && python3 -m RangeHTTPServer 8000
 # then open http://localhost:8000
+# (RangeHTTPServer instead of http.server so seeking in the podcast audio works)
 ```
 
 ## Deploy on GitHub Pages
@@ -30,6 +31,6 @@ python3 -m http.server 8000
 1. Merge this branch into `main`
 2. On GitHub: **Settings → Pages → Build and deployment**
 3. Source: **Deploy from a branch**, branch `main`, folder `/ (root)`
-4. The site appears at `https://thejimmo.github.io/The-first-spell/`
+4. The site appears at `https://jimiknightley.com/` (custom domain via the `CNAME` file; the fallback URL is `https://thejimmo.github.io/The-first-spell/`)
 
 All asset paths are relative, so the project-page subpath works without changes.
