@@ -46,28 +46,16 @@ the published site. Add anything else that shouldn't be publicly fetchable there
 
 ## File structure
 
-```
-/                       ← web root, served as-is by GitHub Pages
-  index.html            ← the entire site (hero, #contract, #about, #listen sections)
-  CNAME                 ← custom domain: jimiknightley.com. Do not remove.
-  _config.yml           ← Pages/Jekyll config; excludes tooling from the built site
-  deploy.py             ← commit + push + watch the Pages build
-  README.md             ← public-facing repo readme
-  CLAUDE.md             ← this file
+The web root is served as-is by GitHub Pages, and `index.html` is the entire site
+(sections `#contract`, `#about`, `#listen`). What `ls` won't tell you:
 
-css/
-  style.css             ← all styles; design tokens in :root at the top
-
-js/
-  main.js               ← scroll-reveal (IntersectionObserver) + custom podcast player
-
-assets/
-  cover.jpg             ← real book cover used by the hero
-  cover.png             ← og:image (social preview)
-  cover.svg             ← hand-built fallback if cover.jpg is ever missing
-  favicon.svg
-  ai_radio.mp3          ← podcast episode played in the #listen section (~4.5 MB)
-```
+- `CNAME` — pins the custom domain `jimiknightley.com`. **Do not remove it.**
+- `_config.yml` — Pages/Jekyll config whose only job is keeping tooling and docs out
+  of the published site.
+- `assets/cover.jpg` is the real cover; `cover.svg` is a hand-built fallback the hero
+  swaps in if the jpg is missing, and `cover.png` is the `og:image` for social previews.
+- `assets/ai_radio.mp3` (~4.5 MB) is the podcast episode in `#listen` — the reason the
+  local preview needs a Range-capable server (see below).
 
 ---
 

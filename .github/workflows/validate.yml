@@ -1,0 +1,75 @@
+name: Validate branch
+
+# GitHub Pages publishes `main` by itself, so there is no deploy job here.
+# This runs on pull requests and on any branch that isn't main, to catch the
+# things that would silently break the published site.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # CNAME is what pins the custom domain. Losing it silently moves the site
+      # to thejimmo.github.io/The-first-spell/ and breaks jimiknightley.com.
+      - name: CNAME intact
+        run: |
+          test -f CNAME || { echo "CNAME is missing — the custom domain would break"; exit 1; }
+          grep -qx 'jimiknightley.com' CNAME || {
+            echo "CNAME does not contain jimiknightley.com:"; cat CNAME; exit 1; }
+          echo "CNAME OK"
+
+      - name: Core files present
+        run: |
+          set -e
+          for f in index.html css/style.css js/main.js _config.yml; do
+            test -f "$f" || { echo "missing: $f"; exit 1; }
+          done
+          grep -q '<title>' index.html || { echo "index.html has no <title>"; exit 1; }
+          echo "core files OK"
+
+      # Tooling and docs must stay out of the published site.
+      - name: Jekyll excludes still cover the tooling
+        run: |
+          set -e
+          for f in deploy.py README.md CLAUDE.md; do
+            grep -q -- "- $f" _config.yml || {
+              echo "_config.yml no longer excludes $f — it would be published"; exit 1; }
+          done
+          echo "excludes OK"
+
+      # Every relative asset referenced by the page must actually exist, or the
+      # live site 404s them. Absolute URLs and anchors are skipped.
+      - name: Referenced local assets exist
+        run: |
+          python3 - <<'PY'
+          import re, sys, pathlib
+          html = pathlib.Path("index.html").read_text(encoding="utf-8")
+          refs = re.findall(r'(?:href|src)\s*=\s*["\']([^"\']+)["\']', html)
+          missing = []
+          for r in refs:
+              if r.startswith(("http://", "https://", "//", "#", "mailto:", "data:")):
+                  continue
+              p = pathlib.Path(r.split("?", 1)[0].split("#", 1)[0].lstrip("/"))
+              if not p.as_posix():
+                  continue
+              if not p.exists():
+                  missing.append(r)
+          if missing:
+              print("Referenced files that do not exist:")
+              for m in missing:
+                  print("  -", m)
+              sys.exit(1)
+          print(f"all {len(refs)} referenced assets resolve")
+          PY
+
+      - name: Summary
+        run: |
+          echo "Branch is safe to merge."
+          echo "Merging to main publishes it — GitHub Pages rebuilds automatically."
