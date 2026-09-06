@@ -1,0 +1,10 @@
+# Claude Code local settings (machine-specific paths, permissions)
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS cruft
+.DS_Store
+Thumbs.db

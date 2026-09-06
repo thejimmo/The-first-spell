@@ -1,0 +1,9 @@
+# GitHub Pages (Jekyll) config.
+# The site is plain static HTML — this file exists only to keep tooling and
+# docs out of the published site. Anything listed here is not copied to
+# jimiknightley.com.
+exclude:
+  - deploy.py
+  - README.md
+  - CLAUDE.md
+  - .gitignore

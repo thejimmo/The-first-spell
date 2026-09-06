@@ -26,11 +26,17 @@ pip install rangehttpserver && python3 -m RangeHTTPServer 8000
 # (RangeHTTPServer instead of http.server so seeking in the podcast audio works)
 ```
 
-## Deploy on GitHub Pages
+## Deploy
 
-1. Merge this branch into `main`
-2. On GitHub: **Settings → Pages → Build and deployment**
-3. Source: **Deploy from a branch**, branch `main`, folder `/ (root)`
-4. The site appears at `https://jimiknightley.com/` (custom domain via the `CNAME` file; the fallback URL is `https://thejimmo.github.io/The-first-spell/`)
+The site is served by GitHub Pages from the `main` branch at the repo root, so
+pushing to `main` is the deploy. Rebuilds take ~30-60 seconds.
 
-All asset paths are relative, so the project-page subpath works without changes.
+```bash
+python deploy.py                    # stage, commit, push, wait for the Pages build
+python deploy.py -m "Fix hero copy" # with a specific commit message
+python deploy.py --status           # report build status without deploying
+```
+
+Live at `https://jimiknightley.com/` (custom domain via the `CNAME` file; the
+fallback URL is `https://thejimmo.github.io/The-first-spell/`). All asset paths
+are relative, so the project-page subpath works without changes.
